@@ -301,8 +301,9 @@ class _MaterialDesktopControlsState extends State<MaterialDesktopControls>
                     else
                       _buildPosition(iconColor),
                     const Spacer(),
-                    if (chewieController.allowMuting)
-                      _buildSetVolumeButton(controller),
+                    _buildMuteButton(controller),
+                    // if (chewieController.allowMuting)
+                    //   _buildSetVolumeButton(controller),
                     if (chewieController.showControls &&
                         chewieController.subtitle != null &&
                         chewieController.subtitle!.isNotEmpty)

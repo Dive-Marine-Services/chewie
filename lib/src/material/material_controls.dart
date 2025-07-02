@@ -287,8 +287,9 @@ class _MaterialControlsState extends State<MaterialControls>
                     if (chewieController.allowMuting)
                       _buildMuteButton(controller),
                     const Spacer(),
-                    if (!chewieController.allowMuting)
-                      _buildSetVolumeButton(controller),
+                    _buildMuteButton(controller),
+                    // if (!chewieController.allowMuting)
+                    //   _buildSetVolumeButton(controller),
                     if (chewieController.allowFullScreen) _buildExpandButton(),
                   ],
                 ),
