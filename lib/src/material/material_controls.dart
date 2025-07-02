@@ -287,7 +287,7 @@ class _MaterialControlsState extends State<MaterialControls>
                     if (chewieController.allowMuting)
                       _buildMuteButton(controller),
                     const Spacer(),
-                    _buildMuteButton(controller),
+                    _buildSetVolumeButton(controller),
                     // if (!chewieController.allowMuting)
                     //   _buildSetVolumeButton(controller),
                     if (chewieController.allowFullScreen) _buildExpandButton(),
@@ -315,69 +315,57 @@ class _MaterialControlsState extends State<MaterialControls>
     );
   }
 
-GestureDetector _buildSetVolumeButton(
+Widget _buildSetVolumeButton(
     VideoPlayerController controller,
   ) {
-    return GestureDetector(
-      onTap: () {
-        _cancelAndRestartTimer();
-
-        if (_latestValue.volume == 0) {
-          controller.setVolume(_latestVolume ?? 0.5);
-        } else {
-          _latestVolume = controller.value.volume;
-          controller.setVolume(0.0);
-        }
-      },
-      child: AnimatedOpacity(
-        opacity: notifier.hideStuff ? 0.0 : 1.0,
-        duration: const Duration(milliseconds: 300),
-        child: Container(
-          width: 200,
-          height: 40,
-          child: Row(children: [
-            Container(
-                width: 25,
-                child: const Icon(
-                  Icons.volume_down,
-                  color: Colors.white,
-                )),
-            Container(
-              width: 150,
-              child: SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  valueIndicatorColor: Colors.white,
-                  valueIndicatorTextStyle: const TextStyle(
-                    color: Colors.blue,
-                  ),
-                  activeTrackColor: Colors.blue,
-                  inactiveTrackColor: Colors.grey.shade300,
-                  trackHeight: 4.0,
-                  thumbColor: Colors.white,
-                  thumbShape: const RoundSliderThumbShape(
-                      enabledThumbRadius: 8.0, elevation: 4.0),
-                  overlayColor: Colors.blue.withAlpha(32),
-                  overlayShape:
-                      const RoundSliderOverlayShape(overlayRadius: 20.0),
+    return AnimatedOpacity(
+      opacity: notifier.hideStuff ? 0.0 : 1.0,
+      duration: const Duration(milliseconds: 300),
+      child: Container(
+        width: 200,
+        height: 40,
+        child: Row(children: [
+          Container(
+              width: 25,
+              child: const Icon(
+                Icons.volume_down,
+                color: Colors.white,
+              )),
+          Container(
+            width: 150,
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                valueIndicatorColor: Colors.white,
+                valueIndicatorTextStyle: const TextStyle(
+                  color: Colors.blue,
                 ),
-                child: Slider(
-                  value: _latestValue.volume,
-                  min: 0.0,
-                  max: 1.0,
-                  divisions: 20,
-                  label: "${(_latestValue.volume * 100).round()}",
-                  onChanged: (v) {
-                    controller.setVolume(v);
-                    _latestVolume = controller.value.volume;
-                  },
-                ),
+                activeTrackColor: Colors.blue,
+                inactiveTrackColor: Colors.grey.shade300,
+                trackHeight: 4.0,
+                thumbColor: Colors.white,
+                thumbShape: const RoundSliderThumbShape(
+                    enabledThumbRadius: 8.0, elevation: 4.0),
+                overlayColor: Colors.blue.withAlpha(32),
+                overlayShape:
+                    const RoundSliderOverlayShape(overlayRadius: 20.0),
+              ),
+              child: Slider(
+                value: _latestValue.volume,
+                min: 0.0,
+                max: 1.0,
+                divisions: 20,
+                label: "${(_latestValue.volume * 100).round()}",
+                onChanged: (v) {
+                  controller.setVolume(v);
+                  _latestVolume = controller.value.volume;
+                },
               ),
             ),
-            Container(
-                width: 25,
-                child: const Icon(Icons.volume_up, color: Colors.white)),
-          ]),
-        ),
+          ),
+          Container(
+              width: 25,
+              child: const Icon(Icons.volume_up, color: Colors.white)),
+        ]),
       ),
     );
   }
