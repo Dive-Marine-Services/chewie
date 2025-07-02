@@ -302,6 +302,9 @@ class _MaterialDesktopControlsState extends State<MaterialDesktopControls>
                       _buildPosition(iconColor),
                     const Spacer(),
                     _buildSetVolumeButton(controller),
+                    SizedBox(
+                      width: 8,
+                    ),
                     // if (chewieController.allowMuting)
                     //   _buildSetVolumeButton(controller),
                     if (chewieController.showControls &&
@@ -478,7 +481,6 @@ class _MaterialDesktopControlsState extends State<MaterialDesktopControls>
       ),
     );
   }
-
 
   GestureDetector _buildMuteButton(
     VideoPlayerController controller,

@@ -288,6 +288,9 @@ class _MaterialControlsState extends State<MaterialControls>
                       _buildMuteButton(controller),
                     const Spacer(),
                     _buildSetVolumeButton(controller),
+                    SizedBox(
+                      width: 8,
+                    ),
                     // if (!chewieController.allowMuting)
                     //   _buildSetVolumeButton(controller),
                     if (chewieController.allowFullScreen) _buildExpandButton(),
@@ -315,7 +318,7 @@ class _MaterialControlsState extends State<MaterialControls>
     );
   }
 
-Widget _buildSetVolumeButton(
+  Widget _buildSetVolumeButton(
     VideoPlayerController controller,
   ) {
     return AnimatedOpacity(
@@ -369,7 +372,6 @@ Widget _buildSetVolumeButton(
       ),
     );
   }
-
 
   GestureDetector _buildMuteButton(
     VideoPlayerController controller,
